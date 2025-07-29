@@ -1,0 +1,1514 @@
+/* ==========================================================================
+   ✅ 1. Reset & Global Typograph
+   ========================================================================== */
+
+body {
+  margin: 0;
+  font-family: 'Cinzel', 'Noto Serif KR', serif;
+  background-color: #111;
+  color: #e0e0e0;
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url('/wp-content/themes/asura-child/img/background.png') center/cover no-repeat;
+}
+
+html {
+  height: 100%;
+  min-height: 100vh;
+}
+
+#page {
+  background: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ========================================================================== 
+   ✅ 2. Header 
+   ========================================================================== */
+
+.asura-custom-main-header {
+  background: rgba(10, 10, 10, 0.5);
+  padding: 15px 25px;
+  border-bottom: 1px solid #4a4a4a;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1000;
+}
+
+.asura-custom-main-header .asura-header-inner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.asura-custom-main-header .site-branding .asura-logo-image {
+  max-height: 60px;
+  width: auto;
+}
+
+
+.asura-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.asura-icon-logo {
+  width: 64px;
+  height: px;
+}
+
+.asura-custom-main-header .tabs {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.asura-custom-main-header .tabs button {
+  background: none;
+  color: #adb5bd;
+  border: none;
+  padding: 8px 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Noto Serif KR', serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.asura-custom-main-header .tabs button:hover,
+.asura-custom-main-header .tabs button.active {
+  color: #E53935;
+}
+
+.asura-custom-main-header .lang-switch {
+  position: absolute;
+  top: 100%;
+  right: 25px;
+  margin-top: 10px;
+  display: flex;
+  gap: 7px;
+}
+
+.asura-custom-main-header .lang-switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100px;
+  height: 48px;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.asura-custom-main-header .lang-switch button:not(.lang-active) {
+  background: #212428;
+  color: #cfd2d6;
+}
+
+.asura-custom-main-header .lang-switch button:not(.lang-active):hover {
+  background: #2d3034;
+}
+
+.asura-custom-main-header .lang-switch button.lang-active {
+  background: #C81A53;
+  color: #fff;
+  border-color: #8e103a;
+}
+
+.asura-custom-main-header .lang-switch img {
+  width: 20px;
+  height: auto;
+}
+
+
+.asura-custom-main-header .tabs button.active,
+.asura-custom-main-header .tabs .dropbtn.active {
+  color: #E53935;
+  text-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
+  font-weight: 900; /* 텍스트를 매우 굵게 만듭니다 */
+}
+
+
+.tabs .dropdown {
+  position: relative;
+}
+
+.tabs .dropbtn {
+  background: none;
+  border: none;
+  color: #adb5bd;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px 10px;
+  font-family: 'Noto Serif KR', serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tabs .dropbtn:hover {
+  color: #E53935;
+}
+
+.tabs .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(160deg, #111, #000); 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    min-width: 190px;
+    z-index: 999;
+    border: 1px solid #444;
+    border-radius: 0; 
+    padding: 8px 0;
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tabs .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.tabs .dropdown-content button {
+  color: #ddd;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid #333;
+}
+
+.tabs .dropdown-content button:last-child {
+  border-bottom: none;
+}
+
+.tabs .dropdown-content button:hover {
+  background-color: rgba(229, 57, 53, 0.1);
+  color: #E53935 !important;
+  padding-left: 16px;
+  border-left: 4px solid #E53935;
+}
+
+.tabs .dropdown-content button::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tabs .dropdown-content button:hover::before {
+  opacity: 1;
+}
+
+button[data-section="map"]::before {
+  background-image: url('img/Abomination.png');
+}
+
+button[data-section="vorici"]::before {
+  background-image: url('img/Chromatic.png');
+}
+
+button[data-section="regex"]::before {
+  background-image: url('img/Map.png');
+}
+
+
+/* ========================================================================== 
+   ✅ 3. Section Visibility
+   ========================================================================== */
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+
+/* ========================================================================== 
+   ✅ 4. 17 tier Calculator
+   ========================================================================== */
+
+
+.map-section {
+  margin-top: 40px;
+  position: relative;
+}
+
+.map-section h1 {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+
+.map-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.map-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map-row label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.map-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.map-input-wrapper input {
+  width: 80px;
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+}
+
+.map-btn {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.map-btn:hover {
+  background-color: #666;
+}
+
+.map-output-box {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+
+.map-rate-box {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.map-copy-wrapper {
+  margin-top: 20px;
+  background-color: #111;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: #fff;
+  font-family: monospace;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Map overlay: map 섹션에서만 보여주기 */
+.map-overlay {
+  display: none;
+  /* 기본 숨김 */
+}
+
+.map-section.active .map-overlay {
+  display: block;
+  /* map active일 때 표시 */
+}
+
+.map-overlay {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #555;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.map-overlay input[type="number"] {
+  height: 28px;
+  font-size: 90%;
+  width: 100px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-align: center;
+}
+
+.map-overlay table {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.map-overlay table th,
+.map-overlay table td {
+  border: 2px solid #fff;
+  padding: 6px 8px;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.map-overlay table img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .map-input-wrapper input {
+    width: 60px;
+  }
+
+  .map-btn {
+    width: 100%;
+  }
+}
+
+.map-overlay p span[data-lang] {
+  color: #ffefb1;
+}
+
+.map-overlay input[type="number"]::-webkit-inner-spin-button,
+.map-overlay input[type="number"]::-webkit-outer-spin-button,
+.container input[type="number"]::-webkit-inner-spin-button,
+.container input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ✅ 서머리 전체 폭을 테이블과 맞춤 */
+.map-overlay .summary-row {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+}
+
+/* ✅ 3등분 박스 */
+.map-overlay .summary-box {
+  width: 33.33%;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+/* ✅ 가운데 박스 버튼만 정렬 */
+.map-overlay .summary-box.center-box {
+  text-align: center;
+}
+
+/* ✅ 입력창 */
+#divineRate {
+  height: 34px;
+  width: 120px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+/* ✅ 버튼 */
+#copySummary {
+  padding: 20px 36px;
+  background: #00ff99;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ✅ 아이콘 */
+.currency-icon {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+/* ✅ 강조 숫자 */
+.total-numbers {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #F9FF5C;
+  margin-left: 6px;
+}
+
+/* ==========================================================================
+   ✅ 5. 보리치 계산기 전용 스타일 (focus 문제 최종 해결)
+   ========================================================================== */
+
+/* ✅ 전체 컨테이너 */
+.vorici-container {
+  display: block;
+  overflow: visible;
+  min-height: 400px;
+  position: relative;
+}
+
+.vorici-container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* ✅ 반투명 배경 박스 */
+.vorici-wrapper {
+  max-width: 1000px;
+  margin: 60px auto;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  border: 1px solid #555;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ✅ 제목 */
+.vorici-title {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 48px;
+}
+
+/* ✅ 본문 전체 정렬 */
+.vorici-calculator {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* ✅ 좌측 폼 */
+.vorici-form {
+  display: grid;
+  /* font: 20px; /* <- 이 줄은 불완전한 구문이므로 삭제했습니다. */
+  grid-template-columns: 160px auto;
+  gap: 25px 40px;
+  align-items: center;
+}
+
+/* 왼쪽 라벨들의 텍스트만 오른쪽 정렬 */
+.vorici-form>label {
+  text-align: left;
+  font-size: 18px;
+}
+
+.vorici-input-group {
+  display: flex;
+  gap: 15px;
+}
+
+.vorici-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-direction: column;
+}
+
+.vorici-input-wrapper label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+/* ✅ 각 입력 */
+.vorici-input {
+  width: 100px;
+  height: 40px;
+  padding: 8px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff !important;
+}
+
+
+/* 1. 모든 입력창에 공통으로 적용될 focus 스타일 (테두리 강조) */
+.vorici-input:focus {
+  outline: 2px solid #00ff99;
+  box-shadow: none;
+}
+
+/* 2. 각 입력창이 focus 되었을 때도 원래 배경색을 유지하도록 명시 */
+#socket,
+#socket:focus {
+  background-color: #555;
+  border-color: #777;
+}
+
+.vorici-input.vorici-red,
+.vorici-input.vorici-red:focus {
+  background-color: rgba(220, 40, 40, 0.4);
+  border-color: rgba(255, 80, 80, 0.6);
+}
+
+.vorici-input.vorici-green,
+.vorici-input.vorici-green:focus {
+  background-color: rgba(40, 220, 40, 0.4);
+  border-color: rgba(80, 255, 80, 0.6);
+}
+
+.vorici-input.vorici-blue,
+.vorici-input.vorici-blue:focus {
+  background-color: rgba(40, 40, 220, 0.4);
+  border-color: rgba(80, 80, 255, 0.6);
+}
+
+
+/* ✅ 계산 버튼 영역 (우측) */
+.vorici-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vorici-btn {
+  width: 130px;
+  height: 120px;
+  font-size: 24px;
+  border-radius: 8px;
+  background: #00ff99;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ✅ 결과 테이블 */
+.vorici-table {
+  width: 80%;
+  margin: 20px auto 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.vorici-table th,
+.vorici-table td {
+  border: 2px solid #ffffff;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  color: #e0e0e0;
+  font-family: 'Cinzel', 'Noto Serif KR', serif;
+  font-size: 22px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.vorici-table th:first-child,
+.vorici-table td:first-child {
+  text-align: center;
+  width: 110px;
+}
+
+.vorici-table th:nth-child(2),
+.vorici-table td:nth-child(2),
+.vorici-table th:nth-child(3),
+.vorici-table td:nth-child(3) {
+  width: 90px;
+}
+
+.vorici-table th:nth-child(4),
+.vorici-table td:nth-child(4) {
+  width: 60px;
+}
+
+/* '평균 비용' 열(두 번째 열)에 연한 회색 배경 적용 */
+.vorici-table td:nth-child(2) {
+  background-color: rgba(165, 44, 44, 0.05);
+}
+
+/* 자바스크립트에 의해 최저 비용으로 판단된 행(class="highlight")에 적용될 스타일 */
+tr.highlight td {
+  background-color: rgba(226, 255, 64, 0.632) !important;
+  /* 다른 배경색을 덮어쓰고 적용 */
+  font-weight: bold;
+  color: #fff;
+}
+
+/* ==========================================================================
+   ✅ 6. Regex Generator 통합 스타일 (최종 정리본)
+   ========================================================================== */
+
+/* --- 1. 기본 레이아웃 및 페이지 컨테이너 --- */
+#regex .container {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #555;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  overflow: visible;
+}
+
+/* --- 2. 상단 고정 출력 및 제어 영역 --- */
+#regex-fixed-container {
+  position: sticky;
+  top: 10px;
+  width: 800px;
+  max-width: 95%;
+  margin: 0 auto 30px;
+  background: rgba(30, 30, 30, 0.96);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+#resetRegexButton {
+  background: #E53935 !important;
+  color: #fff !important;
+}
+
+#resetRegexButton:hover {
+  background: #ff4d4d !important;
+}
+
+/* --- 3. 필터 및 규칙 빌더 --- */
+.filter-container,
+.rule-group {
+  padding: 20px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
+}
+
+.rule-group {
+  background-color: #2a2a2a;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding: 16px;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.numeric-filter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-name {
+  color: #ccc;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #1c1c1c;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.tier-filter-row {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tier-filter-row>span:first-child {
+  font-size: 16px;
+  font-weight: bold;
+  width: 120px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.filter-label {
+  padding: 12px 15px;
+  width: 130px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.filter-label:hover {
+  background-color: #3f3f3f;
+}
+
+.filter-label input[type="checkbox"]:checked+.label-text {
+  font-weight: bold;
+}
+
+#filter-tier16:checked+.label-text {
+  color: #ff6b6b;
+}
+
+#filter-tier17:checked+.label-text {
+  color: #d38eff;
+}
+
+#filter-rarity-normal:checked+.label-text {
+  color: #ffffff;
+}
+
+#filter-rarity-magic:checked+.label-text {
+  color: #8888ff;
+}
+
+#filter-rarity-rare:checked+.label-text {
+  color: #ffff77;
+}
+
+.rule-group-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #3a3a3a;
+  position: relative;
+}
+
+.rule-group-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #eee;
+}
+
+.delete-group-button {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  position: absolute;
+  right: 0;
+}
+
+.delete-group-button:hover {
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.conditions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.condition-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.condition-row .condition-type {
+  flex-basis: 160px;
+  flex-shrink: 0;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+.condition-row .condition-value {
+  flex-grow: 1;
+}
+
+.condition-row .delete-condition-button {
+  flex-shrink: 0;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 38px;
+  height: 38px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.condition-row .delete-condition-button:hover {
+  background-color: #5cdb95;
+}
+
+.rule-group-footer {
+  margin-top: 16px;
+}
+
+.add-condition-button {
+  background: none;
+  border: 1px dashed #666;
+  color: #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.add-condition-button:hover {
+  background-color: #2a2a2a;
+  border-color: #888;
+  color: #fff;
+}
+
+.rule-separator {
+  text-align: center;
+  font-weight: bold;
+  color: #ffd700;
+  margin: 20px 0;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+#add-rule-group-button {
+  width: 100%;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+#add-rule-group-button:hover {
+  background-color: #5cdb95;
+}
+
+/* =================================================================
+   ✅ 4. 모드 선택 영역
+   ================================================================= */
+#mod-area {
+  display: flex;
+  gap: 40px;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.option-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.option-group .mod-search {
+  width: 92%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+#mod-list-bad,
+#mod-list-good {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  min-height: 200px;
+}
+
+.mod-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding: 8px 12px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 16px;
+  /* 기본 폰트 크기를 16px로 유지 */
+  text-align: left;
+  border: none;
+  border-radius: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+#mod-list-bad .mod-btn:last-child,
+#mod-list-good .mod-btn:last-child {
+  border-bottom: none;
+}
+
+#mod-list-bad .mod-btn:hover,
+#mod-list-good .mod-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#mod-list-bad .mod-btn.selected,
+#mod-list-good .mod-btn.selected {
+  background: #4CAF50 !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+/* =================================================================
+   ✅ 5. 유틸리티 (모드 색상)
+   ================================================================= */
+.mod-btn.mod-dark-red:not(.selected) {
+  color: #ff6b6b !important;
+}
+
+.mod-btn.mod-medium-red:not(.selected) {
+  color: #ff8e8e !important;
+}
+
+.mod-btn.mod-purple:not(.selected) {
+  color: #d38eff !important;
+}
+
+.mod-btn.mod-gold:not(.selected) {
+  color: #ffd700 !important;
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 이 섹션이 추가/수정되었습니다 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+/* =================================================================
+   ✅ 5.5. 폰트 크기 덮어쓰기 (가장 좋은 해결책)
+   ================================================================= */
+/* 테마의 기본 버튼 스타일을 이기는 더 구체적인 선택자 사용 */
+#mod-area .mod-btn {
+  font-size: 15px;
+  /* 여기서 원하는 크기로 최종 조절하세요 */
+}
+
+/* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 이 섹션이 추가/수정되었습니다 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+
+/* =================================================================
+   ✅ 6. 아코디언 메뉴 스타일
+   ================================================================= */
+.filter-accordions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.accordion-container {
+  margin: 0;
+  border: 1px solid #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.accordion-toggle {
+  width: 100%;
+  background-color: #1f1f1f;
+  color: #f0f0f0;
+  cursor: pointer;
+  padding: 15px 20px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.accordion-toggle:hover {
+  background-color: #333;
+}
+
+.accordion-toggle::after {
+  content: '▼';
+  font-size: 0.8em;
+  color: #f0f0f0;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.accordion-toggle.active::after {
+  content: '▲';
+}
+
+.accordion-content {
+  background-color: #111;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+/* ======================================================================
+   ✅ 7. 모드 아이콘 & 툴팁 스타일
+   ====================================================================== */
+.mod-text {
+  padding-right: 10px;
+}
+
+.mod-value-display {
+  flex-shrink: 0;
+  line-height: 1;
+  z-index: 2;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.mod-icon {
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  border: 1px solid #555;
+  padding: 3px;
+  box-shadow: 0 0 8px rgba(255, 220, 150, 0.7);
+  transition: transform 0.2s ease-out;
+}
+
+.mod-btn:hover .mod-icon {
+  transform: scale(1.25);
+}
+
+.icon-wrapper .mod-icon::after {
+  content: attr(alt);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #111;
+  color: #eee;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 4;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.icon-wrapper .mod-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   ✅ 7. 팬사이트 CSS (최종 수정안)
+   ========================================================================== */
+
+/* 전체 섹션에 대한 기본 스타일링 및 제목 중앙 정렬 */
+.section {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.section h1 {
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  text-align: center;
+  /* 제목 중앙 정렬 */
+}
+
+/* 카드 그리드 컨테이너 설정 */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 개별 링크 카드 스타일 (새로운 테마 적용) */
+.link-card {
+  /* 1. 배경: '프로스티드 글래스' 효과가 있는 반투명 배경 */
+  background-color: rgba(217, 76, 131, 0.1);
+  /* 핑크빛이 도는 투명 배경 */
+  backdrop-filter: blur(5px);
+  /* 배경을 흐릿하게 만드는 유리 효과 */
+  -webkit-backdrop-filter: blur(5px);
+  /* Safari 브라우저 호환성 */
+
+  /* 2. 테두리: 언어 버튼과 비슷한 핑크색 테두리 */
+  border: 2px solid #D94C83;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  /* 은은한 기본 그림자 */
+  transition: all 0.3s ease;
+  /* 부드러운 전환 효과 */
+
+  /* --- 기존 레이아웃 속성 --- */
+  overflow: hidden;
+  display: flex;
+  width: calc(33.333% - 20px);
+  min-width: 300px;
+  position: relative;
+}
+
+/* 3. 호버 효과: 카드가 떠오르며 핑크색으로 빛나는 효과 */
+.link-card:hover {
+  transform: translateY(-5px);
+
+  /* 핑크색 네온사인처럼 빛나는 그림자 효과 */
+  box-shadow: 0 5px 25px rgba(217, 76, 131, 0.5);
+
+  /* 테두리 색상을 더 밝게 하여 활성화된 느낌 강조 */
+  border-color: #ff89c8;
+}
+
+/* 카드 아이콘 영역 */
+.link-card .card-icon {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-basis: 110px;
+}
+
+.link-card .card-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* 카드 본문 영역 (제목, 설명, 버튼) */
+.link-card .card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.link-card .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #ffffff;
+  /* 제목 색상 흰색으로 유지 */
+}
+
+.link-card .card-desc {
+  font-size: 0.9rem;
+  color: #c7c7c7;
+  /* 가독성을 위해 밝은 회색으로 조정 */
+}
+
+/* 카드 전체를 덮는 투명 링크 */
+.link-card .card-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  font-size: 0;
+  color: transparent;
+  cursor: pointer;
+}
+
+/* 반응형 웹 디자인 */
+@media (max-width: 1024px) {
+  .link-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .link-card {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .link-card .card-body {
+    padding-top: 0;
+  }
+}
+
+/* ========================================================================== 
+   ✅ 8. 빌드 CSS
+   ========================================================================== */
+
+#builds .container {
+  background-color: rgba(0, 0, 0, 0.089);
+  /* 반투명 검정 */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 2em 1em;
+  /* 기존 여백 유지 */
+}
+
+#builds .container h1 {
+  text-align: center;
+  /* 헤딩 중앙 정렬 */
+  margin-bottom: 1.5em;
+}
+
+#builds .container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5em;
+}
+
+#builds .container img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em auto;
+  display: block;
+}
+
+
+
+/* ========================================================================== 
+   ✅ 8. 공통 유틸리티 클래스 
+   ========================================================================== */
+
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+/* ========================================================================== 
+   ✅ 9. 기타
+   ========================================================================== */
+
+/* 좌측 SNS 노란바 제거 */
+.sticky-social,
+#sticky-social,
+.asura-side-left,
+.asura-side-left-content {
+  display: none !important;
+}
+
+/* 하단 WP Koi 핑크색 바 제거 */
+footer,
+.site-info,
+#colophon,
+.copyright-bar {
+  display: none !important;
+}
+
+/* ==========================================================================
+   ✅ 10. 로딩 오버레이 스타일 (수정됨)
+   ========================================================================== */
+
+#loading-overlay {
+  /* 위치 및 크기 설정 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* 디자인 설정 */
+  background: rgba(0, 0, 0, 0.7);
+  /* 반투명 검은색 배경 */
+  z-index: 9999;
+  /* 다른 모든 요소들보다 위에 표시 */
+
+  /* ✨ [수정] 내부 요소(스피너)를 정중앙에 위치시키기 */
+  /* display: none; 속성을 제거하고 아래 3줄로 교체 또는 확인합니다. */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 스피너 스타일 */
+.loading-spinner {
+  width: 100px;
+  height: 100px;
+  border: 20px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ff256e;
+  /* 스피너의 돌아가는 부분 핑크색 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 회전 애니메이션 정의 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   ✅ 11. 스크롤바 & 스크롤 탑 스타일
+   ========================================================================== */
+
+/* 1. 스크롤 바 */
+
+html {
+  scrollbar-width: auto;
+  scrollbar-color: #D94C83 rgba(0, 0, 0, 0.1);
+}
+
+/* 2. 스크롤 백투백 탑 */
+.asura-back-to-top {
+  display: none !important;
+}
+
+#custom-back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
+  background-color: #C81A53;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#custom-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#custom-back-to-top:hover {
+  background-color: #D94C83;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(217, 76, 131, 0.4);
+}
