@@ -3,7 +3,7 @@
  * Template Name: Asura Tool
  */
 
-get_header(); // 워드프레스 기본 헤더 호출
+get_header(); 
 ?>
 
 <div id="primary" class="content-area">
@@ -15,5 +15,5 @@ get_header(); // 워드프레스 기본 헤더 호출
 </div>
 
 <?php
-get_footer(); // 워드프레스 기본 푸터 호출
+get_footer(); 
 ?>

@@ -6,7 +6,6 @@
         </h1>
 
         <?php
-        // 워드프레스 페이지 내용을 동적으로 불러오는 최종 코드
         if (isset($args['post'])) {
             echo apply_filters('the_content', $args['post']->post_content);
         }

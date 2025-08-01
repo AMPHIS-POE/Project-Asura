@@ -1,17 +1,27 @@
-/* ==========================================================================
-   ✅ 1. Reset & Global Typograph
-   ========================================================================== */
+/*
+Theme Name: Asura Child
+Template:   asura
+Author: heinejjw
+*/
 
+/* ==========================================================================
+   ✅ 1. Reset & Global Typography
+   ========================================================================== */
 body {
   margin: 0;
-  font-family: 'Cinzel', 'Noto Serif KR', serif;
+  font-family: 'Noto Serif KR', serif;
   background-color: #111;
   color: #e0e0e0;
   overflow-x: hidden;
-  height: 100%;
   min-height: 100vh;
   position: relative;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
 }
 
 body::before {
@@ -31,18 +41,27 @@ html {
 }
 
 #page {
-  background: transparent;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0 20px 40px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1;
 }
 
+#content.site-content {
+  padding-top: 0;
+}
 /* ========================================================================== 
-   ✅ 2. Header 
+   ✅ 2. Header
    ========================================================================== */
-
 .asura-custom-main-header {
-  background: rgba(10, 10, 10, 0.5);
+  background: rgba(10, 10, 10, 0.8);
   padding: 15px 25px;
   border-bottom: 1px solid #4a4a4a;
   box-sizing: border-box;
@@ -63,7 +82,6 @@ html {
   width: auto;
 }
 
-
 .asura-logo-link {
   display: flex;
   align-items: center;
@@ -72,39 +90,9 @@ html {
 
 .asura-icon-logo {
   width: 64px;
-  height: px;
-}
-
-.asura-custom-main-header .tabs {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  gap: 20px;
-}
-
-.asura-custom-main-header .tabs button {
-  background: none;
-  color: #adb5bd;
-  border: none;
-  padding: 8px 10px;
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 22px;
-  font-family: 'Noto Serif KR', serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.asura-custom-main-header .tabs button:hover,
-.asura-custom-main-header .tabs button.active {
-  color: #E53935;
 }
 
 .asura-custom-main-header .lang-switch {
-  position: absolute;
-  top: 100%;
-  right: 25px;
-  margin-top: 10px;
   display: flex;
   gap: 7px;
 }
@@ -146,14 +134,199 @@ html {
   height: auto;
 }
 
-
-.asura-custom-main-header .tabs button.active,
-.asura-custom-main-header .tabs .dropbtn.active {
-  color: #E53935;
-  text-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
-  font-weight: 900; /* 텍스트를 매우 굵게 만듭니다 */
+/* ==========================================================================
+   ✅ 3. Custom Site Footer
+   ========================================================================== */
+.custom-site-footer {
+  background-color: rgba(10, 10, 10, 0.4);
+  border-top: 1px solid #4a4a4a;
+  padding: 25px 20px;
+  margin-top: 60px;
+  color: #888;
+  flex-shrink: 0;
 }
 
+.custom-site-footer .footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.custom-site-footer .footer-disclaimer {
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.custom-site-footer .footer-social-icons a {
+  display: inline-block;
+  margin: 0 15px;
+  vertical-align: middle;
+  color: #888;
+  font-size: 28px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-site-footer .footer-social-icons a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.custom-site-footer .footer-copyright {
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+/* ========================================= */
+/* Contact Form Popup Styles */
+/* ========================================= */
+
+.contact-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.contact-popup-overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.contact-popup-content {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+
+.contact-popup-overlay:target .contact-popup-content {
+  transform: scale(1);
+}
+
+.contact-popup-content .close-popup {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.contact-popup-content .close-popup:hover {
+  color: #fff;
+}
+
+.contact-popup-content h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+
+.contact-popup-subtitle {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-popup-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-popup-content label {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.contact-popup-content input,
+.contact-popup-content textarea {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #333;
+  color: #f0f0f0;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-popup-content input:focus,
+.contact-popup-content textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.contact-popup-content button {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contact-popup-content button:hover {
+  background-color: #0056b3;
+}
+
+/* ========================================================================== 
+   ✅ 4. Navigation Component (Tabs & Dropdown)
+   ========================================================================== */
+.tabs {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.tabs button {
+  background: none;
+  color: #adb5bd;
+  border: none;
+  padding: 8px 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Noto Serif KR', serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tabs button:hover,
+.tabs button.active {
+  color: #E53935;
+}
+
+.tabs button.active,
+.tabs .dropbtn.active {
+  color: #E53935;
+  text-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
+  font-weight: 900;
+}
 
 .tabs .dropdown {
   position: relative;
@@ -175,19 +348,19 @@ html {
 }
 
 .tabs .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: linear-gradient(160deg, #111, #000); 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-    min-width: 190px;
-    z-index: 999;
-    border: 1px solid #444;
-    border-radius: 0; 
-    padding: 8px 0;
-    overflow: hidden;
-    animation: slideDown 0.3s ease-out forwards;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: none;
+  margin-top: 0;
+  background: linear-gradient(160deg, #111, #000);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  min-width: 190px;
+  z-index: 999;
+  border: 1px solid #444;
+  padding: 8px 0;
+  animation: slideDown 0.3s ease-out forwards;
 }
 
 @keyframes slideDown {
@@ -214,11 +387,8 @@ html {
   gap: 12px;
   font-family: 'Noto Serif KR', serif;
   font-size: 18px;
-  background: none;
-  border: none;
   width: 100%;
   text-align: left;
-  cursor: pointer;
   transition: all 0.2s ease-in-out;
   border-left: 4px solid transparent;
   border-bottom: 1px solid #333;
@@ -263,25 +433,255 @@ button[data-section="regex"]::before {
   background-image: url('img/Map.png');
 }
 
-
-/* ========================================================================== 
-   ✅ 3. Section Visibility
+/* ==========================================================================
+   ✅ 5. Main Landing Page
    ========================================================================== */
-
-.section {
-  display: none;
+.main-landing-banner {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: 50px;
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0;
 }
 
-.section.active {
+.main-landing-banner img {
+  width: 100%;
+  height: auto;
   display: block;
 }
 
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.left-column {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+.content-box {
+  background-color: transparent;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 32px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-box h3 {
+  font-size: 1.5em;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.info-box p {
+  font-size: 1em;
+  color: #cccccc;
+  line-height: 1.6;
+  text-align: left;
+}
+
+
+.cat-box {
+  text-align: left;
+}
+
+.cat-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.cat-box h3 {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.cat-box p {
+  font-size: 1em;
+  color: #cccccc;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.selection-box {
+  align-items: center;
+  text-align: center;
+}
+
+.selection-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.game-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.game-link {
+  display: block;
+  background: transparent !important;
+  border: none !important;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.game-link img {
+  max-width: 240px;
+  height: auto;
+  display: block;
+  transition: all 0.3s ease-in-out;
+  margin: 0 auto;
+}
+
+.game-link:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px #E53935);
+}
+
+.game-link.disabled img {
+  opacity: 0.6;
+  filter: grayscale(80%);
+}
+
+.game-link.disabled:hover img {
+  transform: none;
+  filter: grayscale(80%);
+}
+
+@keyframes breathe-effect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.10);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.selection-box .game-link:not(.disabled) {
+  animation: breathe-effect 3s ease-in-out infinite;
+}
+
+.selection-box .game-link:not(.disabled):hover {
+  transform: scale(1.15) !important;
+}
+
+.selection-box .game-link:not(.disabled):hover img {
+  filter: brightness(1.2) drop-shadow(0 0 15px #E53935);
+}
+
+@media (max-width: 992px) {
+  .game-link img {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-landing-banner {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .left-column {
+    display: contents;
+  }
+
+  .game-link img {
+    max-width: 200px;
+  }
+}
+
+#asura-main-landing {
+  padding-top: 0px;
+}
 
 /* ========================================================================== 
-   ✅ 4. 17 tier Calculator
+   ✅ 6. POE1 Landing Page
    ========================================================================== */
+.poe1-banner {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  line-height: 0;
+}
 
+.poe1-banner img {
+  width: 100%;
+  height: auto;
+}
 
+.poe1-navigation-bar {
+  background-color: #0A0A0A;
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+}
+
+#poe1-sub-content-container .section {
+  padding-top: 0;
+}
+
+#poe1-landing-page {
+  padding: 0;
+}
+
+/* ========================================================================== 
+   ✅ 7. POE2 Landing Page
+   ========================================================================== */
+.poe2-banner {
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  line-height: 0;
+}
+
+.poe2-banner img {
+  width: 100%;
+  height: auto;
+}
+
+.poe2-navigation-bar {
+  background-color: #0A0A0A;
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+}
+
+#poe2-sub-content-container .section {
+  padding-top: 0;
+}
+
+#poe2-landing-page {
+  padding: 0;
+}
+
+/* ========================================================================== 
+   ✅ 8. 17 Tier Calculator
+   ========================================================================== */
 .map-section {
   margin-top: 40px;
   position: relative;
@@ -369,15 +769,12 @@ button[data-section="regex"]::before {
   word-break: break-all;
 }
 
-/* Map overlay: map 섹션에서만 보여주기 */
 .map-overlay {
   display: none;
-  /* 기본 숨김 */
 }
 
 .map-section.active .map-overlay {
   display: block;
-  /* map active일 때 표시 */
 }
 
 .map-overlay {
@@ -426,16 +823,6 @@ button[data-section="regex"]::before {
   vertical-align: middle;
 }
 
-@media (max-width: 600px) {
-  .map-input-wrapper input {
-    width: 60px;
-  }
-
-  .map-btn {
-    width: 100%;
-  }
-}
-
 .map-overlay p span[data-lang] {
   color: #ffefb1;
 }
@@ -448,7 +835,6 @@ button[data-section="regex"]::before {
   margin: 0;
 }
 
-/* ✅ 서머리 전체 폭을 테이블과 맞춤 */
 .map-overlay .summary-row {
   display: flex;
   justify-content: space-between;
@@ -457,19 +843,16 @@ button[data-section="regex"]::before {
   margin: 40px auto 0 auto;
 }
 
-/* ✅ 3등분 박스 */
 .map-overlay .summary-box {
   width: 33.33%;
   color: #e0e0e0;
   font-size: 1rem;
 }
 
-/* ✅ 가운데 박스 버튼만 정렬 */
 .map-overlay .summary-box.center-box {
   text-align: center;
 }
 
-/* ✅ 입력창 */
 #divineRate {
   height: 34px;
   width: 120px;
@@ -482,7 +865,6 @@ button[data-section="regex"]::before {
   margin-left: 8px;
 }
 
-/* ✅ 버튼 */
 #copySummary {
   padding: 20px 36px;
   background: #00ff99;
@@ -494,7 +876,6 @@ button[data-section="regex"]::before {
   font-size: 18px;
 }
 
-/* ✅ 아이콘 */
 .currency-icon {
   width: 28px;
   height: 28px;
@@ -502,7 +883,6 @@ button[data-section="regex"]::before {
   margin: 0 4px;
 }
 
-/* ✅ 강조 숫자 */
 .total-numbers {
   font-size: 1.2rem;
   font-weight: bold;
@@ -510,11 +890,19 @@ button[data-section="regex"]::before {
   margin-left: 6px;
 }
 
-/* ==========================================================================
-   ✅ 5. 보리치 계산기 전용 스타일 (focus 문제 최종 해결)
-   ========================================================================== */
+@media (max-width: 600px) {
+  .map-input-wrapper input {
+    width: 60px;
+  }
 
-/* ✅ 전체 컨테이너 */
+  .map-btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   ✅ 8. Vorici Calculator
+   ========================================================================== */
 .vorici-container {
   display: block;
   overflow: visible;
@@ -528,7 +916,6 @@ button[data-section="regex"]::before {
   clear: both;
 }
 
-/* ✅ 반투명 배경 박스 */
 .vorici-wrapper {
   max-width: 1000px;
   margin: 60px auto;
@@ -539,14 +926,12 @@ button[data-section="regex"]::before {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-/* ✅ 제목 */
 .vorici-title {
   margin-bottom: 40px;
   text-align: center;
   font-size: 48px;
 }
 
-/* ✅ 본문 전체 정렬 */
 .vorici-calculator {
   display: flex;
   justify-content: center;
@@ -554,16 +939,13 @@ button[data-section="regex"]::before {
   margin-bottom: 40px;
 }
 
-/* ✅ 좌측 폼 */
 .vorici-form {
   display: grid;
-  /* font: 20px; /* <- 이 줄은 불완전한 구문이므로 삭제했습니다. */
   grid-template-columns: 160px auto;
   gap: 25px 40px;
   align-items: center;
 }
 
-/* 왼쪽 라벨들의 텍스트만 오른쪽 정렬 */
 .vorici-form>label {
   text-align: left;
   font-size: 18px;
@@ -587,7 +969,6 @@ button[data-section="regex"]::before {
   color: #ccc;
 }
 
-/* ✅ 각 입력 */
 .vorici-input {
   width: 100px;
   height: 40px;
@@ -600,14 +981,11 @@ button[data-section="regex"]::before {
   color: #fff !important;
 }
 
-
-/* 1. 모든 입력창에 공통으로 적용될 focus 스타일 (테두리 강조) */
 .vorici-input:focus {
   outline: 2px solid #00ff99;
   box-shadow: none;
 }
 
-/* 2. 각 입력창이 focus 되었을 때도 원래 배경색을 유지하도록 명시 */
 #socket,
 #socket:focus {
   background-color: #555;
@@ -632,8 +1010,6 @@ button[data-section="regex"]::before {
   border-color: rgba(80, 80, 255, 0.6);
 }
 
-
-/* ✅ 계산 버튼 영역 (우측) */
 .vorici-button-container {
   display: flex;
   align-items: center;
@@ -655,7 +1031,6 @@ button[data-section="regex"]::before {
   align-items: center;
 }
 
-/* ✅ 결과 테이블 */
 .vorici-table {
   width: 80%;
   margin: 20px auto 0 auto;
@@ -695,24 +1070,19 @@ button[data-section="regex"]::before {
   width: 60px;
 }
 
-/* '평균 비용' 열(두 번째 열)에 연한 회색 배경 적용 */
 .vorici-table td:nth-child(2) {
   background-color: rgba(165, 44, 44, 0.05);
 }
 
-/* 자바스크립트에 의해 최저 비용으로 판단된 행(class="highlight")에 적용될 스타일 */
 tr.highlight td {
   background-color: rgba(226, 255, 64, 0.632) !important;
-  /* 다른 배경색을 덮어쓰고 적용 */
   font-weight: bold;
   color: #fff;
 }
 
 /* ==========================================================================
-   ✅ 6. Regex Generator 통합 스타일 (최종 정리본)
+   ✅ 9. Regex Generator
    ========================================================================== */
-
-/* --- 1. 기본 레이아웃 및 페이지 컨테이너 --- */
 #regex .container {
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid #555;
@@ -723,7 +1093,6 @@ tr.highlight td {
   overflow: visible;
 }
 
-/* --- 2. 상단 고정 출력 및 제어 영역 --- */
 #regex-fixed-container {
   position: sticky;
   top: 10px;
@@ -747,7 +1116,6 @@ tr.highlight td {
   background: #ff4d4d !important;
 }
 
-/* --- 3. 필터 및 규칙 빌더 --- */
 .filter-container,
 .rule-group {
   padding: 20px;
@@ -975,9 +1343,6 @@ tr.highlight td {
   background-color: #5cdb95;
 }
 
-/* =================================================================
-   ✅ 4. 모드 선택 영역
-   ================================================================= */
 #mod-area {
   display: flex;
   gap: 40px;
@@ -1023,7 +1388,6 @@ tr.highlight td {
   background: rgba(255, 255, 255, 0.07);
   color: #fff;
   font-size: 16px;
-  /* 기본 폰트 크기를 16px로 유지 */
   text-align: left;
   border: none;
   border-radius: 4px;
@@ -1052,9 +1416,6 @@ tr.highlight td {
   font-weight: bold;
 }
 
-/* =================================================================
-   ✅ 5. 유틸리티 (모드 색상)
-   ================================================================= */
 .mod-btn.mod-dark-red:not(.selected) {
   color: #ff6b6b !important;
 }
@@ -1071,21 +1432,10 @@ tr.highlight td {
   color: #ffd700 !important;
 }
 
-/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 이 섹션이 추가/수정되었습니다 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
-/* =================================================================
-   ✅ 5.5. 폰트 크기 덮어쓰기 (가장 좋은 해결책)
-   ================================================================= */
-/* 테마의 기본 버튼 스타일을 이기는 더 구체적인 선택자 사용 */
 #mod-area .mod-btn {
   font-size: 15px;
-  /* 여기서 원하는 크기로 최종 조절하세요 */
 }
 
-/* ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 이 섹션이 추가/수정되었습니다 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
-
-/* =================================================================
-   ✅ 6. 아코디언 메뉴 스타일
-   ================================================================= */
 .filter-accordions-wrapper {
   display: flex;
   flex-direction: column;
@@ -1142,9 +1492,6 @@ tr.highlight td {
   transition: max-height 0.4s ease-out;
 }
 
-/* ======================================================================
-   ✅ 7. 모드 아이콘 & 툴팁 스타일
-   ====================================================================== */
 .mod-text {
   padding-right: 10px;
 }
@@ -1200,10 +1547,8 @@ tr.highlight td {
 }
 
 /* ==========================================================================
-   ✅ 7. 팬사이트 CSS (최종 수정안)
+   ✅ 9. Fansite Links
    ========================================================================== */
-
-/* 전체 섹션에 대한 기본 스타일링 및 제목 중앙 정렬 */
 .section {
   padding: 60px 0;
   text-align: center;
@@ -1213,10 +1558,8 @@ tr.highlight td {
   margin-bottom: 40px;
   font-size: 2.5rem;
   text-align: center;
-  /* 제목 중앙 정렬 */
 }
 
-/* 카드 그리드 컨테이너 설정 */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -1226,26 +1569,14 @@ tr.highlight td {
   margin: 0 auto;
 }
 
-/* 개별 링크 카드 스타일 (새로운 테마 적용) */
 .link-card {
-  /* 1. 배경: '프로스티드 글래스' 효과가 있는 반투명 배경 */
   background-color: rgba(217, 76, 131, 0.1);
-  /* 핑크빛이 도는 투명 배경 */
   backdrop-filter: blur(5px);
-  /* 배경을 흐릿하게 만드는 유리 효과 */
   -webkit-backdrop-filter: blur(5px);
-  /* Safari 브라우저 호환성 */
-
-  /* 2. 테두리: 언어 버튼과 비슷한 핑크색 테두리 */
   border: 2px solid #D94C83;
-
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  /* 은은한 기본 그림자 */
   transition: all 0.3s ease;
-  /* 부드러운 전환 효과 */
-
-  /* --- 기존 레이아웃 속성 --- */
   overflow: hidden;
   display: flex;
   width: calc(33.333% - 20px);
@@ -1253,18 +1584,12 @@ tr.highlight td {
   position: relative;
 }
 
-/* 3. 호버 효과: 카드가 떠오르며 핑크색으로 빛나는 효과 */
 .link-card:hover {
   transform: translateY(-5px);
-
-  /* 핑크색 네온사인처럼 빛나는 그림자 효과 */
   box-shadow: 0 5px 25px rgba(217, 76, 131, 0.5);
-
-  /* 테두리 색상을 더 밝게 하여 활성화된 느낌 강조 */
   border-color: #ff89c8;
 }
 
-/* 카드 아이콘 영역 */
 .link-card .card-icon {
   padding: 20px;
   display: flex;
@@ -1280,7 +1605,6 @@ tr.highlight td {
   object-fit: contain;
 }
 
-/* 카드 본문 영역 (제목, 설명, 버튼) */
 .link-card .card-body {
   padding: 20px;
   display: flex;
@@ -1296,16 +1620,13 @@ tr.highlight td {
   font-weight: bold;
   margin-bottom: 8px;
   color: #ffffff;
-  /* 제목 색상 흰색으로 유지 */
 }
 
 .link-card .card-desc {
   font-size: 0.9rem;
   color: #c7c7c7;
-  /* 가독성을 위해 밝은 회색으로 조정 */
 }
 
-/* 카드 전체를 덮는 투명 링크 */
 .link-card .card-button {
   position: absolute;
   top: 0;
@@ -1319,7 +1640,6 @@ tr.highlight td {
   cursor: pointer;
 }
 
-/* 반응형 웹 디자인 */
 @media (max-width: 1024px) {
   .link-card {
     width: calc(50% - 20px);
@@ -1339,21 +1659,17 @@ tr.highlight td {
 }
 
 /* ========================================================================== 
-   ✅ 8. 빌드 CSS
+   ✅ 10. Builds Page
    ========================================================================== */
-
 #builds .container {
   background-color: rgba(0, 0, 0, 0.089);
-  /* 반투명 검정 */
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 2em 1em;
-  /* 기존 여백 유지 */
 }
 
 #builds .container h1 {
   text-align: center;
-  /* 헤딩 중앙 정렬 */
   margin-bottom: 1.5em;
 }
 
@@ -1370,12 +1686,16 @@ tr.highlight td {
   display: block;
 }
 
-
-
 /* ========================================================================== 
-   ✅ 8. 공통 유틸리티 클래스 
+   ✅ 11. Common Utilities
    ========================================================================== */
+.section {
+  display: none;
+}
 
+.section.active {
+  display: block;
+}
 
 .flex-center {
   display: flex;
@@ -1404,10 +1724,8 @@ tr.highlight td {
 }
 
 /* ========================================================================== 
-   ✅ 9. 기타
+   ✅ 12. Misc / Overrides
    ========================================================================== */
-
-/* 좌측 SNS 노란바 제거 */
 .sticky-social,
 #sticky-social,
 .asura-side-left,
@@ -1415,8 +1733,8 @@ tr.highlight td {
   display: none !important;
 }
 
-/* 하단 WP Koi 핑크색 바 제거 */
-footer,
+div.site-footer,
+/* 'div.site-footer'를 직접 선택하여 숨깁니다. */
 .site-info,
 #colophon,
 .copyright-bar {
@@ -1424,42 +1742,35 @@ footer,
 }
 
 /* ==========================================================================
-   ✅ 10. 로딩 오버레이 스타일 (수정됨)
+   ✅ 13. Loading Overlay
    ========================================================================== */
-
 #loading-overlay {
-  /* 위치 및 크기 설정 */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
-  /* 디자인 설정 */
   background: rgba(0, 0, 0, 0.7);
-  /* 반투명 검은색 배경 */
   z-index: 9999;
-  /* 다른 모든 요소들보다 위에 표시 */
-
-  /* ✨ [수정] 내부 요소(스피너)를 정중앙에 위치시키기 */
-  /* display: none; 속성을 제거하고 아래 3줄로 교체 또는 확인합니다. */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
 }
 
-/* 스피너 스타일 */
 .loading-spinner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
   width: 100px;
   height: 100px;
   border: 20px solid rgba(255, 255, 255, 0.2);
   border-top-color: #ff256e;
-  /* 스피너의 돌아가는 부분 핑크색 */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-/* 회전 애니메이션 정의 */
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -1467,17 +1778,13 @@ footer,
 }
 
 /* ==========================================================================
-   ✅ 11. 스크롤바 & 스크롤 탑 스타일
+   ✅ 14. Scrollbar & Back-to-Top
    ========================================================================== */
-
-/* 1. 스크롤 바 */
-
 html {
   scrollbar-width: auto;
   scrollbar-color: #D94C83 rgba(0, 0, 0, 0.1);
 }
 
-/* 2. 스크롤 백투백 탑 */
 .asura-back-to-top {
   display: none !important;
 }

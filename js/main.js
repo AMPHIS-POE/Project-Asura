@@ -1,11 +1,7 @@
-// Asura SPA Main Script
-
 (function ($) {
     let currentLang = 'en';
 
-
     /* 1. Language Switcher */
-
     function changeLang(lang) {
         const validLangs = ['ko', 'en'];
         if (!validLangs.includes(lang)) {
@@ -27,6 +23,18 @@
         $('.header-navigation-elements [data-lang]').hide();
         const headerSelector = (lang === 'ko') ? '[data-lang="ko"]' : '[data-lang="en"]';
         $('.header-navigation-elements').find(headerSelector).show();
+
+        const $contactPopup = $('#contact-popup');
+        if ($contactPopup.length > 0) {
+            $contactPopup.find('[data-lang]').hide();
+
+            const popupSelector = (lang === 'ko') ? '[data-lang="ko"]' : '[data-lang="en"]';
+            $contactPopup.find(popupSelector).show();
+
+            const $closeButton = $contactPopup.find('.close-popup');
+            const titleAttr = (lang === 'ko') ? $closeButton.attr('title-ko') : $closeButton.attr('title-en');
+            $closeButton.attr('title', titleAttr);
+        }
 
         document.dispatchEvent(new CustomEvent('langChanged', { detail: { lang: lang } }));
     }
@@ -53,58 +61,94 @@
     }
 
     /* 3. Content Loader */
-    function loadContent(section) {
+    function loadContent(game, section) {
+        if (!section) {
+            section = game;
+            game = null;
+        }
+
         updateActiveTab(section);
 
-        const container = $('#asura-content-container');
-        if (!container.length) return;
+        let $targetContainer = $('#asura-content-container');
+        let isSubContent = false;
+
+        if (game === 'poe1' && section !== 'landing') {
+            $targetContainer = $('#poe1-sub-content-container');
+            isSubContent = true;
+        }
+
+        if (!$targetContainer.length) {
+            console.error('Target container not found.');
+            return;
+        }
+
+        if (!isSubContent) {
+            $targetContainer.html('');
+        }
 
         $('#loading-overlay').fadeIn(200);
 
+        let apiUrl = game
+            ? `/wp-json/asura/v1/get_section/${game}/${section}`
+            : `/wp-json/asura/v1/get_section/${section}`;
+
         $.ajax({
-            url: `/wp-json/asura/v1/get_section/${section}`,
+            url: apiUrl,
             method: 'GET',
             dataType: 'html',
             success: function (response) {
-                container.html(response);
-                $('.section.active').removeClass('active');
-                container.find('.section').first().addClass('active');
+                $targetContainer.html(response);
+                $targetContainer.find('.section.active').removeClass('active');
+                $targetContainer.find('.section').first().addClass('active');
 
                 changeLang(currentLang);
 
                 setTimeout(function () {
-                    switch (section) {
-                        case 'map':
-                            if (typeof window.mapCalculatorInit === 'function') window.mapCalculatorInit();
-                            break;
-                        case 'regex':
-                            if (typeof window.regexGeneratorInit === 'function') window.regexGeneratorInit();
-                            break;
-                    }
+                    if (typeof window.mapCalculatorInit === 'function') window.mapCalculatorInit();
+                    if (typeof window.regexGeneratorInit === 'function') window.regexGeneratorInit();
                     $('#loading-overlay').fadeOut(200);
                 }, 0);
             },
             error: function (jqXHR) {
-                container.html(`<p class="loading-text" style="display: block; color: #FFB3B3;">${jqXHR.responseText}</p>`);
+                $targetContainer.html(`<p class="loading-text" style="display: block; color: #FFB3B3;">${jqXHR.responseText}</p>`);
                 $('#loading-overlay').fadeOut(200);
             }
         });
     }
 
     /* 4. SPA Routing */
-    $(document).on('click', '.header-navigation-elements button[data-section], .dropdown-content a[data-section]', function (event) {
+    $(document).on('click', '.poe1-navigation-bar button[data-section]', function (event) {
         event.preventDefault();
         const section = $(this).data('section');
-        const url = `/${section}`;
+        const game = 'poe1';
+        const url = `/${game}/${section}`;
+
         if (window.location.pathname === url) return;
 
-        history.pushState({ section: section }, '', url);
-        loadContent(section);
+        history.pushState({ game: game, section: section }, '', url);
+        loadContent(game, section);
+    });
+
+    $(document).on('click', '.game-link[data-game]', function (event) {
+        event.preventDefault();
+        const game = $(this).data('game');
+        const section = $(this).data('section');
+
+        if ($(this).hasClass('disabled')) {
+            return;
+        }
+
+        const url = `/${game}`;
+
+        if (window.location.pathname === url) return;
+
+        history.pushState({ game: game, section: section }, '', url);
+        loadContent(game, section);
     });
 
     $(window).on('popstate', function (event) {
-        if (event.originalEvent.state && event.originalEvent.state.section) {
-            loadContent(event.originalEvent.state.section);
+        if (event.originalEvent.state) {
+            loadContent(event.originalEvent.state.game, event.originalEvent.state.section);
         } else {
             handleInitialPageLoad();
         }
@@ -112,26 +156,42 @@
 
     /* 5. Initial Page Load Handler */
     function handleInitialPageLoad() {
-        const path = window.location.pathname;
-        const parts = path.split('/').filter(Boolean);
-        let section = parts[0];
-        const allowedSections = ['map', 'vorici', 'regex', 'links', 'builds'];
+        const baseUrl = new URL(window.asura_page_data.base_url);
+        const currentUrl = new URL(window.location.href);
 
-        if (!section || !allowedSections.includes(section)) {
-            section = 'map';
-            history.replaceState({ section: section }, '', `/${section}`);
+        const normalizedBasePath = baseUrl.pathname.replace(/^\/|\/$/g, '');
+        const normalizedCurrentPath = currentUrl.pathname.replace(/^\/|\/$/g, '');
+
+        let spaPath = '';
+        if (normalizedCurrentPath.startsWith(normalizedBasePath)) {
+            spaPath = normalizedCurrentPath.substring(normalizedBasePath.length).replace(/^\/|\/$/g, '');
+        } else {
+            spaPath = normalizedCurrentPath.replace(/^\/|\/$/g, '');
         }
-
-        loadContent(section);
+        
+        const parts = spaPath.split('/').filter(Boolean);
+        const game = parts[0];
+        let section = parts[1];
+        
+        if (game && !section) {
+            section = 'landing';
+        }
+        
+        if (game) {
+            loadContent(game, section);
+        } else {
+            loadContent(null, 'main');
+        }
     }
+
 
     /* 6. Document Ready (Entry Point) */
     $(document).ready(function () {
-        const initialLang = window.asura_geoip_vars?.lang || 'en';
+        const initialLang = window.asura_page_data?.lang || 'en';
         changeLang(initialLang);
 
         handleInitialPageLoad();
-
+        
         const backToTopButton = $('#custom-back-to-top');
 
         $(window).on('scroll', function () {

@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <?php wp_head(); ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body <?php body_class(); ?>>
@@ -37,41 +38,6 @@ if ( function_exists( 'wp_body_open' ) ) {
     </div>
 
         <nav class="header-navigation-elements" aria-label="<?php esc_attr_e( 'Header Menu', 'asura-child' ); ?>">
-            <div class="tabs">
-
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        <span data-lang="ko">계산기</span>
-                        <span data-lang="en">Calculators</span>
-                    </button>
-                    <div class="dropdown-content">
-                        <button data-section="map">
-                            <span data-lang="ko">17티어</span>
-                            <span data-lang="en">17 Tier</span>
-                        </button>
-                        <button data-section="vorici">
-                            <span data-lang="ko">색채</span>
-                            <span data-lang="en">Chromatic</span>
-                        </button>
-                        <button data-section="regex">
-                            <span data-lang="ko">정규식</span>
-                            <span data-lang="en">Regex</span>
-                        </button>
-                    </div>
-                </div>
-
-                <button id="tab-links" data-section="links">
-                    <span data-lang="ko">링크 모음</span>
-                    <span data-lang="en">Links</span>
-                </button>
-
-                <button id="tab-builds" data-section="builds">
-                    <span data-lang="ko">빌드 소개</span>
-                    <span data-lang="en">Builds</span>
-                </button>
-
-            </div>
-
             <div class="lang-switch">
                 <button onclick="changeLang('ko')">
                     <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/KOREA.png" alt="KO">한글

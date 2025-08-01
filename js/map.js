@@ -1,5 +1,5 @@
+// 기존 Map Calculator 초기화 함수 유지
 function mapCalculatorInit() {
-
     // 1. Variable Definitions
     const container = document.getElementById('asura-content-container');
     if (!container) return;
@@ -138,3 +138,4 @@ function mapCalculatorInit() {
 
 // 7. Expose Initializer to Global Scope
 window.mapCalculatorInit = mapCalculatorInit;
+

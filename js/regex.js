@@ -36,7 +36,7 @@ const MapModList = [
     mod: "플레이어가 생명력, 마나 또는 에너지 보호막 재생 불가",
     engMod: "Players cannot Regenerate Life, Mana or Energy Shield",
     regex: "재생",
-    engRegex: "gen",
+    engregex: "gen",
     tier17: false
   },
   {
