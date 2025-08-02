@@ -1,7 +1,9 @@
 (function ($) {
     let currentLang = 'en';
 
-    /* 1. Language Switcher */
+    /**
+     * 1. 언어 변경 기능
+     */
     function changeLang(lang) {
         const validLangs = ['ko', 'en'];
         if (!validLangs.includes(lang)) {
@@ -13,12 +15,9 @@
         $('.lang-switch button').removeClass('lang-active');
         $(`.lang-switch button[onclick="changeLang('${lang}')"]`).addClass('lang-active');
 
-        const activeSection = $('#asura-content-container .section.active');
-        if (activeSection.length > 0) {
-            activeSection.find('[data-lang]').hide();
-            const selector = (lang === 'ko') ? '[data-lang="ko"], [data-lang="kr"]' : '[data-lang="en"]';
-            activeSection.find(selector).show();
-        }
+        $('#asura-content-container').find('[data-lang]').hide();
+        const selector = (lang === 'ko') ? '[data-lang="ko"], [data-lang="kr"]' : '[data-lang="en"]';
+        $('#asura-content-container').find(selector).show();
 
         $('.header-navigation-elements [data-lang]').hide();
         const headerSelector = (lang === 'ko') ? '[data-lang="ko"]' : '[data-lang="en"]';
@@ -27,10 +26,8 @@
         const $contactPopup = $('#contact-popup');
         if ($contactPopup.length > 0) {
             $contactPopup.find('[data-lang]').hide();
-
             const popupSelector = (lang === 'ko') ? '[data-lang="ko"]' : '[data-lang="en"]';
             $contactPopup.find(popupSelector).show();
-
             const $closeButton = $contactPopup.find('.close-popup');
             const titleAttr = (lang === 'ko') ? $closeButton.attr('title-ko') : $closeButton.attr('title-en');
             $closeButton.attr('title', titleAttr);
@@ -40,7 +37,9 @@
     }
     window.changeLang = changeLang;
 
-    /* 2. Active Tab Updater */
+    /**
+     * 2. 활성 탭 UI 업데이트
+     */
     function updateActiveTab(section) {
         const navContainer = document.querySelector('.header-navigation-elements');
         if (!navContainer) return;
@@ -60,35 +59,32 @@
         }
     }
 
-    /* 3. Content Loader */
-    function loadContent(game, section) {
+    /**
+         * 3. 콘텐츠 AJAX 로더 (active 클래스 추가)
+         */
+    function loadContent(game, section, callback) {
         if (!section) {
             section = game;
             game = null;
         }
-
         updateActiveTab(section);
 
-        let $targetContainer = $('#asura-content-container');
-        let isSubContent = false;
-
+        let $targetContainer;
         if (game === 'poe1' && section !== 'landing') {
             $targetContainer = $('#poe1-sub-content-container');
-            isSubContent = true;
+        } else {
+            $targetContainer = $('#asura-content-container');
         }
 
         if (!$targetContainer.length) {
-            console.error('Target container not found.');
+            console.error('콘텐츠를 삽입할 컨테이너를 찾지 못했습니다:', game, section);
+            $('#loading-overlay').fadeOut(200);
             return;
-        }
-
-        if (!isSubContent) {
-            $targetContainer.html('');
         }
 
         $('#loading-overlay').fadeIn(200);
 
-        let apiUrl = game
+        const apiUrl = game
             ? `/wp-json/asura/v1/get_section/${game}/${section}`
             : `/wp-json/asura/v1/get_section/${section}`;
 
@@ -97,15 +93,21 @@
             method: 'GET',
             dataType: 'html',
             success: function (response) {
+                // 이전 콘텐츠를 지우고 새로운 콘텐츠를 삽입
                 $targetContainer.html(response);
-                $targetContainer.find('.section.active').removeClass('active');
-                $targetContainer.find('.section').first().addClass('active');
+                // 새로 삽입된 .section 요소에 active 클래스를 추가하여 보이게 만듦
+                $targetContainer.find('.section').addClass('active');
 
                 changeLang(currentLang);
 
                 setTimeout(function () {
                     if (typeof window.mapCalculatorInit === 'function') window.mapCalculatorInit();
                     if (typeof window.regexGeneratorInit === 'function') window.regexGeneratorInit();
+
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+
                     $('#loading-overlay').fadeOut(200);
                 }, 0);
             },
@@ -116,16 +118,16 @@
         });
     }
 
-    /* 4. SPA Routing */
+    /**
+     * 4. SPA 네비게이션 이벤트 핸들러
+     */
     $(document).on('click', '.poe1-navigation-bar button[data-section]', function (event) {
         event.preventDefault();
         const section = $(this).data('section');
         const game = 'poe1';
         const url = `/${game}/${section}`;
-
         if (window.location.pathname === url) return;
-
-        history.pushState({ game: game, section: section }, '', url);
+        history.pushState({ game, section }, '', url);
         loadContent(game, section);
     });
 
@@ -133,67 +135,49 @@
         event.preventDefault();
         const game = $(this).data('game');
         const section = $(this).data('section');
-
-        if ($(this).hasClass('disabled')) {
-            return;
-        }
-
+        if ($(this).hasClass('disabled')) return;
         const url = `/${game}`;
-
         if (window.location.pathname === url) return;
-
-        history.pushState({ game: game, section: section }, '', url);
+        history.pushState({ game, section }, '', url);
         loadContent(game, section);
     });
 
-    $(window).on('popstate', function (event) {
-        if (event.originalEvent.state) {
-            loadContent(event.originalEvent.state.game, event.originalEvent.state.section);
-        } else {
-            handleInitialPageLoad();
-        }
+    $(window).on('popstate', function () {
+        handleInitialPageLoad();
     });
 
-    /* 5. Initial Page Load Handler */
+    /**
+         * 5. 초기 페이지 로드 및 직접 접속 처리 (최종 완성)
+         */
     function handleInitialPageLoad() {
-        const baseUrl = new URL(window.asura_page_data.base_url);
-        const currentUrl = new URL(window.location.href);
-
-        const normalizedBasePath = baseUrl.pathname.replace(/^\/|\/$/g, '');
-        const normalizedCurrentPath = currentUrl.pathname.replace(/^\/|\/$/g, '');
-
-        let spaPath = '';
-        if (normalizedCurrentPath.startsWith(normalizedBasePath)) {
-            spaPath = normalizedCurrentPath.substring(normalizedBasePath.length).replace(/^\/|\/$/g, '');
-        } else {
-            spaPath = normalizedCurrentPath.replace(/^\/|\/$/g, '');
-        }
-        
-        const parts = spaPath.split('/').filter(Boolean);
+        const path = window.location.pathname.replace(/^\/|\/$/g, '');
+        const parts = path.split('/').filter(Boolean);
         const game = parts[0];
-        let section = parts[1];
-        
-        if (game && !section) {
-            section = 'landing';
-        }
-        
-        if (game) {
-            loadContent(game, section);
-        } else {
+        const section = parts[1];
+
+        if (parts.length === 0) {
+            // 루트 페이지('/')일 경우, 'main' 콘텐츠를 AJAX로 불러옴
             loadContent(null, 'main');
+        } else if (parts.length === 1) {
+            // 게임 랜딩 페이지 (예: /poe1)
+            loadContent(game, 'landing');
+        } else {
+            // 하위 페이지 (예: /poe1/map)
+            loadContent(game, 'landing', function () {
+                loadContent(game, section);
+            });
         }
     }
 
-
-    /* 6. Document Ready (Entry Point) */
+    /**
+     * 6. 문서 로딩 완료 후 실행
+     */
     $(document).ready(function () {
         const initialLang = window.asura_page_data?.lang || 'en';
         changeLang(initialLang);
-
         handleInitialPageLoad();
-        
-        const backToTopButton = $('#custom-back-to-top');
 
+        const backToTopButton = $('#custom-back-to-top');
         $(window).on('scroll', function () {
             if ($(this).scrollTop() > 300) {
                 backToTopButton.addClass('visible');
@@ -207,4 +191,5 @@
             $('html, body').stop().animate({ scrollTop: 0 }, 400);
         });
     });
+
 })(jQuery);

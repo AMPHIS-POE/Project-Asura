@@ -3,7 +3,7 @@
  * Template Part for Main Landing Page
  */
 ?>
-<div class="section" id="asura-main-landing">
+<div class="section active" id="asura-main-landing">
 
     <div class="main-landing-banner">
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/banner-asura.png" alt="Asura Main Banner">
@@ -18,9 +18,9 @@
                 </h3>
                 <p>
                     <span data-lang="ko">
-                        레이클라스트를 위하여                   </span>
+                        레이클라스트와 유배자를 위한 공간입니다                   </span>
                     <span data-lang="en">
-                        For Wraecalst and Exile
+                        Place for Wraecalst and Exile
 
                     </span>
                 </p>
